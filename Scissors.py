@@ -8,8 +8,9 @@ class Scissor():
         self.Scissors_rect=self.Scissors_img.get_rect(center=(320,80))
         
         
-        
-        
     def Display(self,win):
         win.blit(self.Scissors_img,self.Scissors_rect)
             
+            
+    def Selection_scissors(self):
+        return self.Scissors_img

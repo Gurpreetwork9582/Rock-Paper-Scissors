@@ -30,11 +30,32 @@ class RPS:
         self.text_rect=self.text.get_rect(center=(190,190))
     
     
+    
+    
+        #Empty Place to place the hands for player
+        self.option_img = None
+        self.option_rect = pg.Rect(153,250,50,50)
+        
+        
+        #Empty Place for Computer to Select
+        self.option_comp_img = None
+        self.option_comp_rect=pg.Rect(153,400,50,50)
+    
     def Gameloop(self):
         while True:                 #infinite loof for window to keep on displaying
             for event in pg.event.get():
                 if event.type == pg.QUIT: #quiting when cliked on X
                     sys.exit()
+                if event.type == pg.MOUSEBUTTONDOWN:
+                    if self.paper.Paper_rect.collidepoint(event.pos):
+                        self.option_img = self.paper.Selection_paper()
+                    if self.rock.Rock_rect.collidepoint(event.pos):
+                        self.option_img = self.rock.Selection_rock()
+                    if self.scissor.Scissors_rect.collidepoint(event.pos):
+                        self.option_img = self.scissor.Selection_scissors()
+                        
+                    
+                        
                     
                     
             self.Display()          #Display function 
@@ -48,9 +69,18 @@ class RPS:
         self.paper.Display(self.win)            # Called the Paper class and used the display
         self.rock.Display(self.win)             # Called the Rock class and used the display
         self.scissor.Display(self.win)          # Called the Scissors class and used the display
-        self.win.blit(self.text,self.text_rect)
-            
-            
+        self.win.blit(self.text,self.text_rect) # Text "choose you option"
+        
+        if self.option_img:                     # Empty image
+            self.win.blit(self.option_img,self.option_rect)
+        
+        
+           
+    
+        
+    
+        
+        
             
             
             

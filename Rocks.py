@@ -8,8 +8,10 @@ class Rock():
         self.Rock_rect=self.Rock_img.get_rect(center=(200,80))
         
         
-        
-        
     def Display(self,win):
         win.blit(self.Rock_img,self.Rock_rect)
             
+            
+            
+    def Selection_rock(self):
+        return self.Rock_img

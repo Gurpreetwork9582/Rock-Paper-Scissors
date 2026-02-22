@@ -13,3 +13,7 @@ class Paper():
     def Display(self,win):
         win.blit(self.Paper_img,self.Paper_rect)
             
+            
+    def Selection_paper(self):
+        return self.Paper_img
+        
