@@ -42,27 +42,5 @@ pip install pygame
 python Test.py
 
 **Program Flow:**
-Game starts 
-↓
-Window, images, and fonts load
-↓
-Player clicks Rock / Paper / Scissors
-↓
-Computer randomly selects an option
-↓
-Program compares choices
-↓
-Winner is decided and score updates
-↓
-If score reaches 3
-↓
-Gameover() runs
-↓
-Reset button appears
-↓
-Player clicks Reset
-↓
-GameReset() runs
-↓
-Score resets and game restarts
+Game starts -> Window, images, and fonts load -> Player clicks Rock / Paper / Scissors -> Computer randomly selects an option -> Program compares choices -> Winner is decided and score updates -> If score reaches 3 -> Gameover() runs -> Reset button appears -> Player clicks Reset -> GameReset() runs -> Score resets and game restarts
 
