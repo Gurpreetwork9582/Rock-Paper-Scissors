@@ -15,7 +15,7 @@ class RPS:
         
         
         #Background
-        self.bg_img=pg.transform.smoothscale_by(pg.image.load(r"/Users/guri/Rock-Paper-scissors/assets/Background.jpg").convert_alpha(),0.75)
+        self.bg_img=pg.transform.smoothscale_by(pg.image.load(r"assets/Background.jpg").convert_alpha(),0.75)
         self.bg_rect=self.bg_img.get_rect(center=(100,200))
     
     
@@ -27,7 +27,7 @@ class RPS:
     
     
         #font 
-        self.font=pg.font.Font(r"/Users/guri/Rock-Paper-scissors/assets/font.ttf",15)
+        self.font=pg.font.Font(r"assets/font.ttf",15)
         self.text=self.font.render("Select your option",True,(255,255,255),(0,0,0))
         self.text_rect=self.text.get_rect(center=(190,190))
     
@@ -45,14 +45,14 @@ class RPS:
         self.option_comp_rect=pg.Rect(270,250,50,50)
     
         #Score
-        self.score_font=pg.font.Font("/Users/guri/Rock-Paper-scissors/assets/font.ttf",30)
+        self.score_font=pg.font.Font(r"assets/font.ttf",30)
         self.score=self.score_font.render("Score : 0 / 3", True, (255,255,255))
         self.score_rect=self.score.get_rect(center=(self.win.get_width() // 2, int(self.win.get_height() * 0.9)))
         self.score_no = 0
         
         
         #Result
-        self.result_font=pg.font.Font("/Users/guri/Rock-Paper-scissors/assets/font.ttf",30)
+        self.result_font=pg.font.Font(r"assets/font.ttf",30)
         self.result=self.result_font.render("Result", True, (255,255,255))
         self.result_rect=self.score.get_rect(center=( self.win.get_width() // 2,425))
 

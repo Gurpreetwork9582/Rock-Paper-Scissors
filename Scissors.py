@@ -4,7 +4,7 @@ import pygame as pg
 
 class Scissor():
     def __init__(self):
-        self.Scissors_img=pg.transform.scale_by(pg.image.load(r'/Users/guri/Rock-Paper-scissors/assets/Scissors.png', "Scissors").convert_alpha(),0.5)
+        self.Scissors_img=pg.transform.scale_by(pg.image.load(r'assets/Scissors.png', "Scissors").convert_alpha(),0.5)
         self.Scissors_rect=self.Scissors_img.get_rect(center=(370,80))
         
         
