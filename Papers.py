@@ -18,5 +18,6 @@ class Paper():
         return self.Paper_img
     
     
+    
         
         

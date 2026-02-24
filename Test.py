@@ -3,6 +3,7 @@ import sys,random
 from Papers import Paper
 from Rocks import Rock
 from Scissors import Scissor
+from Button import Button
 pg.init()
 
 
@@ -22,6 +23,7 @@ class RPS:
         self.paper=Paper()
         self.rock=Rock()
         self.scissor=Scissor()
+        self.button=Button(self.win)
     
     
         #font 
@@ -58,6 +60,9 @@ class RPS:
         #New Game
         self.is_Gameover =False
     
+    
+        #Button
+        self.is_button_clicked =False
         
     def Gameloop(self):
         while True:                 #infinite loof for window to keep on displaying
@@ -65,15 +70,21 @@ class RPS:
                 if event.type == pg.QUIT: #quiting when cliked on X
                     sys.exit()
                 if event.type == pg.MOUSEBUTTONDOWN:
-                    if self.paper.Paper_rect.collidepoint(event.pos):
-                        self.option_img = self.paper.Selection_paper()
-                        self.is_opt_selected= True
-                    if self.rock.Rock_rect.collidepoint(event.pos):
-                        self.option_img = self.rock.Selection_rock()
-                        self.is_opt_selected= True
-                    if self.scissor.Scissors_rect.collidepoint(event.pos):
-                        self.option_img = self.scissor.Selection_scissors()
-                        self.is_opt_selected= True
+                   if not self.is_Gameover: 
+                        if self.paper.Paper_rect.collidepoint(event.pos):
+                            self.option_img = self.paper.Selection_paper()
+                            self.is_opt_selected= True
+                        if self.rock.Rock_rect.collidepoint(event.pos):
+                            self.option_img = self.rock.Selection_rock()
+                            self.is_opt_selected= True
+                        if self.scissor.Scissors_rect.collidepoint(event.pos):
+                            self.option_img = self.scissor.Selection_scissors()
+                            self.is_opt_selected= True 
+                   else:  
+                        if self.button.Reset_button_rect.collidepoint(event.pos):
+                            self.GameReset()
+                            self.is_Gameover=False
+                        
                         
             #** need to place computer selection**#        
                 if self.is_opt_selected and not self.is_Gameover:        
@@ -83,9 +94,12 @@ class RPS:
                     
                     
                 #If game over, Resetting the game     
-                if self.is_Gameover:
-                    self.is_Gameover=False
-                    self.Gameover()
+                
+                    #self.is_Gameover=False
+                    #self.Gameover()
+                   # self.Gameover()
+                
+                    
                     
                  
                     
@@ -112,6 +126,8 @@ class RPS:
         if self.option_img and self.option_comp_img:    
             self.win.blit(self.result,self.result_rect)
         
+        if self.is_Gameover:
+            self.button.draw()
         
     
     # Computer Selection
@@ -149,13 +165,23 @@ class RPS:
              self.score=self.score_font.render(f"Score : {self.score_no}/3", True, (255,255,255))
              if self.score_no == 3:
                  self.is_Gameover=True
+                 self.Gameover()
+                   
                  
-                 
-    #resetting the game
+    
+    #Would ask user to "click to reset"
     def Gameover(self):
+      
         self.option_img = None
         self.option_comp_img = None
-        self.score=self.score_font.render(f"Score : 0 / 3", True, (255,255,255))
+        self.result=self.result_font.render("GAME OVER!!!!!",True,(255,255,255))
+      
+                 
+    #resetting the game
+    def GameReset(self):
+        self.option_img = None
+        self.option_comp_img = None
+        self.score=self.score_font.render("Score : 0 / 3", True, (255,255,255))
         self.score_no = 0
         self.result=self.result_font.render("Result", True, (255,255,255))
         
