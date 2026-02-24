@@ -25,7 +25,7 @@ class RPS:
     
     
         #font 
-        self.font=pg.font.Font(r"/Users/guri/Rock-Paper-scissors/assets/font.ttf",25)
+        self.font=pg.font.Font(r"/Users/guri/Rock-Paper-scissors/assets/font.ttf",15)
         self.text=self.font.render("Select your option",True,(255,255,255),(0,0,0))
         self.text_rect=self.text.get_rect(center=(190,190))
     
@@ -34,27 +34,30 @@ class RPS:
     
         #Empty Place to place the hands for player
         self.option_img = None
-        self.option_rect = pg.Rect(153,250,50,50)
+        self.option_rect = pg.Rect(80,250,50,50)
         self.is_opt_selected= False
         
         
         #Empty Place for Computer to Select
         self.option_comp_img = None
-        self.option_comp_rect=pg.Rect(153,400,50,50)
+        self.option_comp_rect=pg.Rect(270,250,50,50)
     
         #Score
         self.score_font=pg.font.Font("/Users/guri/Rock-Paper-scissors/assets/font.ttf",30)
-        self.score=self.score_font.render("Score : 0", True, (255,255,255))
-        self.score_rect=self.score.get_rect(center=(350,420))
+        self.score=self.score_font.render("Score : 0 / 3", True, (255,255,255))
+        self.score_rect=self.score.get_rect(center=(self.win.get_width() // 2, int(self.win.get_height() * 0.9)))
+        self.score_no = 0
         
         
         #Result
         self.result_font=pg.font.Font("/Users/guri/Rock-Paper-scissors/assets/font.ttf",30)
         self.result=self.result_font.render("Result", True, (255,255,255))
-        self.result_rect=self.score.get_rect(center=( self.win.get_width() // 2,
-        int(self.win.get_height() * 0.9)))
+        self.result_rect=self.score.get_rect(center=( self.win.get_width() // 2,425))
 
-        
+                
+        #New Game
+        self.is_Gameover =False
+    
         
     def Gameloop(self):
         while True:                 #infinite loof for window to keep on displaying
@@ -73,10 +76,17 @@ class RPS:
                         self.is_opt_selected= True
                         
             #** need to place computer selection**#        
-                if self.is_opt_selected:        
+                if self.is_opt_selected and not self.is_Gameover:        
                     self.Comp_Selection() 
                     self.Comparing()
                     self.is_opt_selected=False 
+                    
+                    
+                #If game over, Resetting the game     
+                if self.is_Gameover:
+                    self.is_Gameover=False
+                    self.Gameover()
+                    
                  
                     
             self.Display()          #Display function 
@@ -129,13 +139,26 @@ class RPS:
         
         if self.option_img == self.option_comp_img:
             self.result=self.result_font.render("YOU TIE", True, (255,255,255))
-        
+            
         elif (self.option_img == self.rock.Selection_rock() and self.option_comp_img  == self.paper.Selection_paper()) or (self.option_img == self.paper.Selection_paper() and self.option_comp_img  == self.scissor.Selection_scissors()) or (self.option_img == self.scissor.Selection_scissors() and self.option_comp_img  == self.rock.Selection_rock()):
             self.result=self.result_font.render("COMPUTER GOT YA", True, (255,255,255))
             
         else:
              self.result=self.result_font.render("Hurrehhh, YOU WON!!!", True, (255,255,255))
-            
+             self.score_no +=1
+             self.score=self.score_font.render(f"Score : {self.score_no}/3", True, (255,255,255))
+             if self.score_no == 3:
+                 self.is_Gameover=True
+                 
+                 
+    #resetting the game
+    def Gameover(self):
+        self.option_img = None
+        self.option_comp_img = None
+        self.score=self.score_font.render(f"Score : 0 / 3", True, (255,255,255))
+        self.score_no = 0
+        self.result=self.result_font.render("Result", True, (255,255,255))
+        
             
 c1=RPS()
 c1.Gameloop()

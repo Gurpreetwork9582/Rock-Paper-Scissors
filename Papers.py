@@ -16,4 +16,7 @@ class Paper():
             
     def Selection_paper(self):
         return self.Paper_img
+    
+    
+        
         
